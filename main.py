@@ -1,0 +1,51 @@
+﻿import time
+from include import *
+from trapezoidal_rule import sequential_integrate, parallel_integrate
+
+if __name__ == "__main__":
+    USE_TRAPEZOIDAL_RULE = True
+    if USE_TRAPEZOIDAL_RULE:
+        import trapezoidal_rule
+        print("Running Trapezoidal Rule")
+    else:
+        import simpson_rule
+        print("Running Simpson's Rule")
+        pass
+
+    print("\nSequential execution through all test size")
+    cumulative_time = 0
+    for size in problem_sizes:
+        start = time.time()
+        res = sequential_integrate(target_function, a, b, size)
+        end = time.time()
+        sequential_time = end - start
+        print(f"Size:  {size}\tTime: {sequential_time:.6f}\tResult: {res:.10f}")
+        cumulative_time += sequential_time
+    print(f"Cumulative time: {cumulative_time:.6f}")
+
+    print("\nStability test for maximum size:")
+    stability_cumulative_time = 0
+    max_size = problem_sizes[-1]
+    for i in range(5):
+        start = time.time()
+        res = sequential_integrate(target_function, a, b, max_size)
+        end = time.time()
+        sequential_time = end - start
+
+        print(f"Size:  {max_size}\tTime: {sequential_time:.6f}\tResult: {res:.10f}")
+        stability_cumulative_time += sequential_time
+    print(f"Cumulative time: {stability_cumulative_time:.6f}")
+
+    print("\nParallel execution:")
+    for processor_num in processor_nums:
+        print(f"{processor_num} Processors:")
+        parallel_cumulative_time = 0
+        for size in problem_sizes:
+            start = time.time()
+            res = parallel_integrate(target_function, a, b, size, processor_num)
+            end = time.time()
+            sequential_time = end - start
+
+            print(f"Size:  {size}\tTime: {sequential_time:.6f}\tResult: {res:.10f}")
+            parallel_cumulative_time += sequential_time
+        print(f"{processor_num} processors cumulative time: {parallel_cumulative_time:.6f}\n")
