@@ -3,10 +3,10 @@
 # Trapezoidal Rule. Yang Chen A0318687L
 def sequential_integrate(f, a, b, n):
     h = (b - a) / n
-    # (y0 + y1) * h / 2 + (y1 + y2) * h / 2 + ... + (yn-2 + yn-1) * h / 2
-    res = 0
+    # (y0 + y1) * h / 2 + (y1 + y2) * h / 2 + ... + (yn-1 + yn) * h / 2
+    res = f(a) + f(b)
     for i in range(n - 1):
-        res += f(a + i * h) + f(a + (i + 1) * h)
+        res += f(a + (i + 1) * h)
     res *= h / 2
     return res
 
