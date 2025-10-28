@@ -1,14 +1,13 @@
 ﻿import time
 from include import *
-from simpson_rule import sequential_integrate, parallel_integrate
 
 if __name__ == "__main__":
     USE_TRAPEZOIDAL_RULE = False
     if USE_TRAPEZOIDAL_RULE:
-        import trapezoidal_rule
+        from trapezoidal_rule import sequential_integrate, parallel_integrate
         print("Running Trapezoidal Rule")
     else:
-        import simpson_rule
+        from simpson_rule import sequential_integrate, parallel_integrate
         print("Running Simpson's Rule")
         pass
     
