@@ -2,7 +2,10 @@
 from include import *
 
 if __name__ == "__main__":
+
+    #Set this to use either Trapezoidal Rule or Simpson's Rule
     USE_TRAPEZOIDAL_RULE = False
+
     if USE_TRAPEZOIDAL_RULE:
         from trapezoidal_rule import sequential_integrate, parallel_integrate
         print("Running Trapezoidal Rule")
